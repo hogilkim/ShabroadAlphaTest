@@ -27,7 +27,7 @@ try {
     console.log(error);
 }
 
-app.use("/files", express.static(path.resolve(__dirname, "..", "files")));
+app.use("/files", express.static(path.resolve(__dirname, "files")));
 app.use(routes);
 
 app.listen(PORT, () => {

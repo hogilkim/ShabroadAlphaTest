@@ -14,6 +14,5 @@ routes.get('/', (req, res) => {
 
 routes.post('/register', UserController.store);
 
-routes.post('/createAcademy', upload.fields({ name: "file", maxCount: 10})) // fields function used -> multer uses forEach -> error
-
+routes.post('/createAcademy', upload.array("files", 11), AcademyController.createAcademy) //
 module.exports = routes;

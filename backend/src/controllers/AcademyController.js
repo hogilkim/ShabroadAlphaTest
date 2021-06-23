@@ -3,8 +3,12 @@ const Academy = require('../models/Academy');
 module.exports = {
     async createAcademy(req, res){
         const {name, telephone_number, address, email, location, nearby_amenity, capacity, rating} = req.body;
-        // const { filename } = req.files;
-
+        // console.log(req.files)
+        let array = [];
+        req.files.forEach(function(json){
+            array.push({picture: json.filename});
+            // console.log(json.filename);
+        })
         const academy = await Academy.create({
             name,
             telephone_number,
@@ -14,18 +18,8 @@ module.exports = {
             nearby_amenity,
             capacity,
             rating,
-            academy_pictres: req.files
+            academy_pictures: array
         })
-        console.log('academy controller')
         return res.json(academy);
     }
 }
-
-// name: String,
-// telephone_number: String,
-// address: String,
-// email: String,
-// location: String,
-// nearby_amenity: String,
-// capacity: Number,
-// rating: Number,

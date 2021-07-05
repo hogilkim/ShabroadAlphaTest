@@ -10,12 +10,16 @@ const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: true})); //body-parser
+
 
 if (process.env.NODE_ENV !== 'production') {
 	require('dotenv').config()
 }
 
 
+app.use("/files", express.static(path.resolve(__dirname, "files")));
+app.use(routes);
 
 try {
     mongoose.connect(process.env.MONGO_DB_CONNECTION, {
@@ -27,8 +31,6 @@ try {
     console.log(error);
 }
 
-app.use("/files", express.static(path.resolve(__dirname, "files")));
-app.use(routes);
 
 app.listen(PORT, () => {
 	console.log(`Listening on ${PORT}`)

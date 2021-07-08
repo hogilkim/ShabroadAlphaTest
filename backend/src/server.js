@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const routes = require('./routes');
-const UserController = require('./controllers/UserController');
+const userRouter = require('./routes/userRoutes')
+
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use("/files", express.static(path.resolve(__dirname, "files")));
 app.use(routes);
+app.use("/user", userRouter)
 
 try {
     mongoose.connect(process.env.MONGO_DB_CONNECTION, {

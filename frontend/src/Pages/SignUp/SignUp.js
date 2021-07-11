@@ -1,18 +1,8 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import { Container, Typography, Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box} from '@material-ui/core';
+import {Alert} from '@material-ui/lab'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-
-import Container from '@material-ui/core/Container';
 
 import useStyles from './styles';
 
@@ -27,19 +17,41 @@ import Copyright from '../../components/Copyright/Copyright'
 
 export default function SignUp() {
   const history = useHistory();
-  const [signupData, setSignupData] = useState({firstName: '', lastname: '', email: '', password: '', })
+  const [signupData, setSignupData] = useState({firstName: '', lastname: '', email: '', password: '', confirm_password: ''})
   const dispatch = useDispatch();
   const classes = useStyles();
 
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleChange = (e) => {
     setSignupData({ ...signupData, [e.target.name]: e.target.value});
+    
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
     console.log("Sign Up Page:", signupData);
-    dispatch(ReduxSignup(signupData, history));
+    if (signupData.firstName && signupData.lastName && signupData.email){
+      if(signupData.password === signupData.confirm_password){
+        dispatch(ReduxSignup(signupData, history));
+      } else {
+        setError(true);
+        setErrorMessage("비밀번호가 다릅니다. 다시 확인하여 주십시오"); //confirm password wrong message
+        setTimeout(()=>{
+          setError(false);
+          setErrorMessage("")
+        }, 2000)
+      }
+    } else {
+      setError(true);
+      setErrorMessage("모든 정보를 기입하여 주십시오."); // fill in all blanks message
+      setTimeout(()=>{
+        setError(false);
+        setErrorMessage("")
+      }, 2000)
+    }
   }
 
 
@@ -104,6 +116,20 @@ export default function SignUp() {
                 autoComplete="current-password"
                 onChange={handleChange}
               />
+            
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="confirm_password"
+                label="confirm password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={handleChange}
+              />
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
@@ -112,6 +138,7 @@ export default function SignUp() {
               />
             </Grid>
           </Grid>
+          {error && <Alert severity="error">{errorMessage}</Alert>}
           <Button
             type="submit"
             fullWidth

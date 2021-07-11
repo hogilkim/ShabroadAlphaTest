@@ -14,8 +14,10 @@ const {errorHandler} = require('../helper/dbErrorHandling');
 
 
 module.exports = {
-    async store(req, res){
+    async signup(req, res){
+        
         try {
+
             const { email, firstName, lastName, password } = req.body;
             const errors = validationResult(req);
 
@@ -23,6 +25,8 @@ module.exports = {
                 const firstError = errors.array().map(error => error.msg)[0];
                 return res.status(422).json({errrors: firstError});
             } else {
+                
+
                 const existentUser = await User.findOne({email})
 
                 if(existentUser) {
@@ -30,7 +34,6 @@ module.exports = {
                         error: "Email is taken"
                     });
                 }
-
                 const token = jwt.sign({
                     firstName, 
                     lastName, 
@@ -56,7 +59,7 @@ module.exports = {
                 }
 
 
-                
+                console.log("63");
                 
                 sgMail.send(emailData)
                 .then(()=>{
@@ -101,6 +104,47 @@ module.exports = {
             })
         }
     },
+
+    // Activation & save to MongoDB
+    async activate(req, res){
+        const {token} = req.body;
+        if (token){
+            jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION,
+                (err, decode) => {
+                    if(err){
+                        return res.status(401).json({
+                            error: '시간이 만료되었습니다. 처음부터 다시 회원가입을 진행하여 주십시오.'
+                        })
+                    }else {
+                        const {firstName, lastName, email, password} = jwt.decode(token);
+            
+                        const user = new User({
+                            firstName, lastName, email, password
+                        })
+            
+                        user.save((err, user)=> {
+                            if(err){
+                                return res.status(401).json({
+                                    error: errorHandler(err)
+                                })
+                            } else {
+                                return res.json({
+                                    success: true,
+                                    message: '회원가입 완료!',
+                                    message: user
+                                })
+                            }
+                        })
+                    }
+                })
+        } else {
+            return res.json({
+                message: '회원가입 오류. 다시 한번 시도하여 주십시오.'
+            })
+        }
+    },
+
+
     async login(req, res) {
         const { email, password } = req.body;
         

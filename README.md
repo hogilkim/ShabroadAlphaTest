@@ -18,3 +18,15 @@ backend:
     npm express-validator
     UserController: adding email verification function. Need to fix sendgrid's api key process.env problem.
     Email sending function success! 
+
+July 11
+backend:
+    working on email verification controller... verification after sending email
+    validator.js : checks if the user has submitted valid information.
+    finished email verification. Need to work on frontend email confirmation page.
+frontend:
+    Sign Up page: now users should fill in all blanks
+                            should confirm password
+                    Otherwise, error message
+
+July 12: NEED TO WORK ON EMAIL CONFIRMATION PAGE - FRONTEND

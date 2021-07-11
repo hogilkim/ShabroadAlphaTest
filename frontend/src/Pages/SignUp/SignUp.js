@@ -17,7 +17,7 @@ import Copyright from '../../components/Copyright/Copyright'
 
 export default function SignUp() {
   const history = useHistory();
-  const [signupData, setSignupData] = useState({firstName: '', lastname: '', email: '', password: '', confirm_password: ''})
+  const [signupData, setSignupData] = useState({firstName: '', lastName: '', email: '', password: '', confirm_password: ''})
   const dispatch = useDispatch();
   const classes = useStyles();
 

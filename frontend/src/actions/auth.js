@@ -17,7 +17,7 @@ export const ReduxSignup = (signupData, history) => async(dispatch) => {
         console.log("actions:", signupData);
         dispatch({ type: SIGNUP, data})
 
-        history.push('/login')
+        // history.push('/login')
     } catch (error) {
         console.log(error);
     }

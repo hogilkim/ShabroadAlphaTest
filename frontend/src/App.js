@@ -11,6 +11,7 @@ import NotFound from "./Pages/NotFound";
 import MyPage from "./Pages/MyPage/MyPage";
 import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
+import Activate from "./Pages/Activate/Activate"
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
                     <Route path= '/mypage' exact component={MyPage} />
                     <Route path= '/login' exact component={Login} />
                     <Route path= '/signup' exact component={SignUp} />
+                    <Route path= '/users/activate/:token' exact component={Activate}/>
                     <Route component={NotFound}/>   //Not Found Page if wrong url
                 </Switch>
             </Container>

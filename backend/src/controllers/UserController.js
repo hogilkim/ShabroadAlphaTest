@@ -20,6 +20,8 @@ module.exports = {
 
             const { email, firstName, lastName, password } = req.body;
             const errors = validationResult(req);
+            
+            const hashedPassword = await bcrypt.hash(password,12);
 
             if(!errors.isEmpty()){
                 const firstError = errors.array().map(error => error.msg)[0];
@@ -38,7 +40,7 @@ module.exports = {
                     firstName, 
                     lastName, 
                     email, 
-                    password
+                    password: hashedPassword
                     }, process.env.JWT_ACCOUNT_ACTIVATION,
                     {
                         expiresIn: '15m'
@@ -51,12 +53,13 @@ module.exports = {
                     subject: "Account Activation Link",
                     html:`
                         <h1> 이메일 인증을 위해 링크를 클릭해 주세요 </h1>
-                        <p> localhost:3000/users/activate/${token}</p>
+                        <a href="http://localhost:3000/users/activate/${token}">활성화하기</a>
                         <hr/>
                         <p> 이 이메일은 개인정보를 포함하고 있습니다. 노출되지 않게 주의해 주세요. 계정이 활성화 되었다면 이메일을 삭제하여 주십시오.</p>
                         <p>localhost:3000</p>
                     `
                 }
+                // <p> localhost:3000/users/activate/${token}</p>
 
 
                 console.log("63");

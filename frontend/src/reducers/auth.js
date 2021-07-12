@@ -1,4 +1,4 @@
-import { LOGIN, SIGNUP } from "../constants/actionTypes";
+import { LOGIN, SIGNUP, ACTIVATION } from "../constants/actionTypes";
 
 const authReducer = (state = {authData: null}, action) => {
     switch (action.type) {
@@ -9,6 +9,9 @@ const authReducer = (state = {authData: null}, action) => {
         
         case SIGNUP:
             console.log("reducer:", state);
+            return {...state, authData: action?.data};
+        case ACTIVATION:
+            console.log("reducer: ", state);
             return {...state, authData: action?.data};
         default:
             return state;

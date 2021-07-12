@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+// import {useHistory} from 'react-router-dom';
 import { Container, Typography, Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box} from '@material-ui/core';
 import {Alert} from '@material-ui/lab'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -16,13 +16,14 @@ import Copyright from '../../components/Copyright/Copyright'
 
 
 export default function SignUp() {
-  const history = useHistory();
+  // const history = useHistory();
   const [signupData, setSignupData] = useState({firstName: '', lastName: '', email: '', password: '', confirm_password: ''})
   const dispatch = useDispatch();
   const classes = useStyles();
 
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState(false);//!
 
   const handleChange = (e) => {
     setSignupData({ ...signupData, [e.target.name]: e.target.value});
@@ -35,7 +36,7 @@ export default function SignUp() {
     console.log("Sign Up Page:", signupData);
     if (signupData.firstName && signupData.lastName && signupData.email){
       if(signupData.password === signupData.confirm_password){
-        dispatch(ReduxSignup(signupData, history));
+        dispatch(ReduxSignup(signupData, setSuccess));
       } else {
         setError(true);
         setErrorMessage("비밀번호가 다릅니다. 다시 확인하여 주십시오"); //confirm password wrong message
@@ -148,6 +149,7 @@ export default function SignUp() {
           >
             회원가입
           </Button>
+          {success&&<Alert severity="success">이메일이 발송되었습니다. 이메일을 확인하여 주십시오.</Alert>}
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href="localhost:3000/login" variant="body2">

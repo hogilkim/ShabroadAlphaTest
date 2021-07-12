@@ -29,4 +29,8 @@ frontend:
                             should confirm password
                     Otherwise, error message
 
-July 12: NEED TO WORK ON EMAIL CONFIRMATION PAGE - FRONTEND
+July 12: 
+    backend:
+        Completed email verification function. 
+    frontend:
+        completed email verification page.

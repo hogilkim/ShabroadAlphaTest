@@ -34,3 +34,7 @@ July 12:
         Completed email verification function. 
     frontend:
         completed email verification page.
+
+July 14:
+    backend: 
+        UserController login: changed return values. it also had error. fixed.

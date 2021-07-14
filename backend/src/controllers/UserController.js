@@ -149,19 +149,38 @@ module.exports = {
 
 
     async login(req, res) {
+
         const { email, password } = req.body;
-        
-        try {
+        const errors = validationResult(req);
+        console.log(email);
+        if(!errors.isEmpty()){
+            const firstError = errors.array().map(error=>error.msg)[0];
+            return res.status(422).json({
+                error: firstError
+            })
+        } try {
             const existingUser = await User.findOne({email});
+            console.log(existingUser);
             if (!existingUser) return res.satus(404).json({message: "User Does not exist!"});
 
             const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
 
             if (!isPasswordCorrect) return res.status(404).json({message: "wrong password"})
 
-            const token = jwt.sign({email: existingUser.email, id: existingUser._id}, process.env.JWT_SECRET, {expiresIn: "1d"})
+            const token = jwt.sign({
+                email: existingUser.email, 
+                id: existingUser._id
 
-            res.status(200).json({result: existingUser, token});
+            }, process.env.JWT_SECRET, {expiresIn: "1d"})
+
+            res.status(200).json({user: {
+                id : existingUser._id,
+                firstName : existingUser.firstName,
+                lastName : existingUser.lastName,
+                email : existingUser.email,
+                userType : existingUser.userType
+            }, token});
+        
         } catch (error) {
             res.status(500).json({message: "Something Went Wrong: backend UserController.js"})
         }

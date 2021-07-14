@@ -1,12 +1,17 @@
 import {LOGIN, SIGNUP, ACTIVATION} from '../constants/actionTypes'
 import * as api from '../api/api';
 
-export const ReduxLogin = (loginData, history) => async (dispatch) => {
+export const ReduxLogin = (loginData, setLoginSuccess, history) => async (dispatch) => {
     try {
         const {data} = await api.login(loginData);
+        setLoginSuccess(true);
         dispatch({type: LOGIN, data})
-        history.push('/')
+        setTimeout(()=>history.push('/'), 2000)
+        
+        
     } catch (error) {
+        setLoginSuccess(false);
+        console.log("failed");
         console.log(error);
     }
 }

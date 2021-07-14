@@ -7,7 +7,8 @@ import useStyles from './styles';
 const Navbar = () => {
     const classes = useStyles();
 
-    const user = null;
+    const user = localStorage.getItem('user');
+    console.log("Navbar: ", user);
 
     return (
         <>

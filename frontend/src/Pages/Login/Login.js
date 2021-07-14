@@ -1,17 +1,9 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import { Container, Typography, Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import {Alert} from '@material-ui/lab'
+
 
 import useStyles from './styles';
 
@@ -29,6 +21,8 @@ import Copyright from '../../components/Copyright/Copyright'
 export default function SignIn() {
   const history = useHistory();
   const [loginData, setLoginData] = useState({email: '', password:''});
+  const [loginSuccess, setLoginSuccess] = useState(null);
+  
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -38,9 +32,10 @@ export default function SignIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(ReduxLogin(loginData, setLoginSuccess, history));
 
-    dispatch(ReduxLogin(loginData, history));
-}
+    }
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -52,6 +47,9 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           로그인
         </Typography>
+
+        {(loginSuccess !== null)&& (loginSuccess ? <Alert severity="success">로그인 성공! 메인 페이지로 돌아갑니다</Alert> : <Alert severity="error">로그인에 실패하였습니다. 다시 시도하여 주십시오.</Alert>)}
+        
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"

@@ -152,7 +152,6 @@ module.exports = {
 
         const { email, password } = req.body;
         const errors = validationResult(req);
-        console.log(email);
         if(!errors.isEmpty()){
             const firstError = errors.array().map(error=>error.msg)[0];
             return res.status(422).json({
@@ -160,7 +159,6 @@ module.exports = {
             })
         } try {
             const existingUser = await User.findOne({email});
-            console.log(existingUser);
             if (!existingUser) return res.satus(404).json({message: "User Does not exist!"});
 
             const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);

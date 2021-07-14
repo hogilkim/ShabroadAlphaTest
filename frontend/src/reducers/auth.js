@@ -1,10 +1,12 @@
 import { LOGIN, SIGNUP, ACTIVATION } from "../constants/actionTypes";
+import {authenticate} from "../helpers/auth"
 
 const authReducer = (state = {authData: null}, action) => {
     switch (action.type) {
         case LOGIN:
-            localStorage.setItem('profile', JSON.stringify({ ...action?.data}));
-
+            // localStorage.setItem('user', JSON.stringify({ ...action?.data}));
+            console.log("reducer: ", action);
+            authenticate(action);
             return {...state, authData: action?.data};
         
         case SIGNUP:

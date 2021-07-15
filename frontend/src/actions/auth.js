@@ -1,4 +1,4 @@
-import {LOGIN, SIGNUP, ACTIVATION} from '../constants/actionTypes'
+import {LOGIN, SIGNUP, ACTIVATION, FORGETPASSWORD, RESETPASSWORD} from '../constants/actionTypes'
 import * as api from '../api/api';
 
 export const ReduxLogin = (loginData, setLoginSuccess, history) => async (dispatch) => {
@@ -36,5 +36,23 @@ export const ReduxActivation = (activationData, setSuccess) => async(dispatch) =
         dispatch({type: ACTIVATION, data});
     } catch (error) {
         console.log(error);
+    }
+}
+
+export const ReduxForgetPassword = (email) => async(dispatch) => {
+    try {
+        const {data} = await api.forgetPassword(email);
+        dispatch({type: FORGETPASSWORD, data});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const ReduxResetPassword = (resetData) => async (dispatch) => {
+    try {
+        const {data} = await api.
+        dispatch({type: RESETPASSWORD, data});
+    } catch (error) {
+        
     }
 }

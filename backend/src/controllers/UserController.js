@@ -10,6 +10,7 @@ const User = require('../models/User');
 
 // Custom error handler to get useful error from database errors
 const {errorHandler} = require('../helper/dbErrorHandling');
+const { default: ResetPassword } = require('../../../frontend/src/Pages/ResetPassword/ResetPassword');
 
 
 
@@ -53,7 +54,7 @@ module.exports = {
                     subject: "Account Activation Link",
                     html:`
                         <h1> 이메일 인증을 위해 링크를 클릭해 주세요 </h1>
-                        <a href="http://localhost:3000/users/activate/${token}">활성화하기</a>
+                        <a href="http://localhost:3000/user/activate/${token}">활성화하기</a>
                         <hr/>
                         <p> 이 이메일은 개인정보를 포함하고 있습니다. 노출되지 않게 주의해 주세요. 계정이 활성화 되었다면 이메일을 삭제하여 주십시오.</p>
                         <p>localhost:3000</p>
@@ -182,5 +183,66 @@ module.exports = {
         } catch (error) {
             res.status(500).json({message: "Something Went Wrong: backend UserController.js"})
         }
+    },
+
+    async forgetPassword(req, res) {
+        const {email} = req.body;
+        const errors = validationResult(req);
+
+        console.log(email);
+
+        if(!errors.isEmpty()){
+            const firstError = errors.array().map(error => error.msg)[0]
+            return res.status(422).json({
+                error: firstError
+            })
+        }
+        const user = await User.findOne({email});
+        if(!user){
+            return res.status(400).json({error: "No Such User"})
+        }
+        
+        
+
+        //if exists
+        const token = jwt.sign({
+            _id: user._id
+        }, process.env.JWT_RESET_PASSWORD, {expiresIn: '10m'})
+
+        //send email with this token
+
+        const emailData = {
+            from: 'hogilkim@gmail.com',
+            to: email,
+            subject: "비밀번호 재설정 링크",
+            html:`
+                <h1> 비밀번호 재설정을 위해 링크를 클릭해 주세요 </h1>
+                <a href="http://localhost:3000/user/reset/${token}">재설정하기</a>
+                <hr/>
+                <p> 이 이메일은 개인정보를 포함하고 있습니다. 노출되지 않게 주의해 주세요. 계정이 활성화 되었다면 이메일을 삭제하여 주십시오.</p>
+                <p>localhost:3000</p>
+            `
+        }
+
+        try {
+            sgMail.send(emailData)
+            .then(()=>{
+                return res.json({
+                    message:`Email has been sent to ${email}`
+                });
+            }).catch(err=>{
+                return res.status(400).json({
+                    errors: errorHandler(err)
+                })
+            });
+        } catch (error) {
+            return res.status(400).json({
+                errors: errorHandler(error)
+            })
+        }
+    },
+
+    async ResetPassword(req, res) {
+        const {password, confirm_password} = req.body; 
     }
 }

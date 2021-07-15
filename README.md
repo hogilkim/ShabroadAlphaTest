@@ -38,3 +38,7 @@ July 12:
 July 14:
     backend: 
         UserController login: changed return values. it also had error. fixed.
+
+July 15:
+    working on password reseting. finished sending email for user who want to reset password.
+    need to work on ResetPassword page & backend password reset.

@@ -4,51 +4,41 @@ import { Container, Typography, Avatar, Button, CssBaseline, TextField, FormCont
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {Alert} from '@material-ui/lab'
 
-
 import useStyles from './styles';
 
 import {useDispatch} from 'react-redux'
-import {ReduxLogin} from '../../actions/auth'
+import {ReduxForgetPassword} from '../../actions/auth'
 
 import Copyright from '../../components/Copyright/Copyright'
 
 
+const ForgetPassword = () => {
+    const history = useHistory();
+    const [email, setEmail] = useState("");
 
+    const dispatch = useDispatch();
+    const classes = useStyles();
 
+    const handleChange = (e) => {
+        setEmail(e.target.value)
+    }
 
-
-
-export default function SignIn() {
-  const history = useHistory();
-  const [loginData, setLoginData] = useState({email: '', password:''});
-  const [loginSuccess, setLoginSuccess] = useState(null);
-  
-  const dispatch = useDispatch();
-  const classes = useStyles();
-
-  const handleChange = (e) => {
-    setLoginData({...loginData, [e.target.name]:e.target.value})
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(ReduxLogin(loginData, setLoginSuccess, history));
-
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(ReduxForgetPassword({email}));
     }
 
 
-  return (
-    <Container component="main" maxWidth="xs">
+    return (
+        <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          로그인
+          비밀번호 찾기
         </Typography>
-
-        {(loginSuccess !== null)&& (loginSuccess ? <Alert severity="success">로그인 성공! 메인 페이지로 돌아갑니다</Alert> : <Alert severity="error">로그인에 실패하였습니다. 다시 시도하여 주십시오.</Alert>)}
         
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
@@ -63,18 +53,6 @@ export default function SignIn() {
             autoFocus
             onChange = {handleChange}
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange = {handleChange}
-          />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
@@ -86,17 +64,17 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            로그인
+            이메일 보내기
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
+              <Link href="/login" variant="body2">
+                로그인하기
               </Link>
             </Grid>
             <Grid item>
               <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
+                회원가입하기
               </Link>
             </Grid>
           </Grid>
@@ -107,5 +85,7 @@ export default function SignIn() {
       </Box>
     <Copyright/>
     </Container>
-  );
+    )
 }
+
+export default ForgetPassword

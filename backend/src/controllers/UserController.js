@@ -6,11 +6,11 @@ sgMail.setApiKey('SG.mVbA028RRrak-6mLEJns-Q.Lhi6rgoFMCW6W8Fb1upFhTVTlqnIOIFELedX
 const nodemailer = require('nodemailer')
 const {validationResult} = require('express-validator');
 const User = require('../models/User');
+const _ = require('lodash');
 
 
 // Custom error handler to get useful error from database errors
 const {errorHandler} = require('../helper/dbErrorHandling');
-const { default: ResetPassword } = require('../../../frontend/src/Pages/ResetPassword/ResetPassword');
 
 
 
@@ -217,32 +217,69 @@ module.exports = {
             subject: "비밀번호 재설정 링크",
             html:`
                 <h1> 비밀번호 재설정을 위해 링크를 클릭해 주세요 </h1>
-                <a href="http://localhost:3000/user/reset/${token}">재설정하기</a>
+                <a href="http://localhost:3000/user/password/reset/${token}">재설정하기</a>
                 <hr/>
                 <p> 이 이메일은 개인정보를 포함하고 있습니다. 노출되지 않게 주의해 주세요. 계정이 활성화 되었다면 이메일을 삭제하여 주십시오.</p>
                 <p>localhost:3000</p>
             `
         }
 
-        try {
-            sgMail.send(emailData)
-            .then(()=>{
-                return res.json({
-                    message:`Email has been sent to ${email}`
-                });
-            }).catch(err=>{
-                return res.status(400).json({
-                    errors: errorHandler(err)
+        return user.updateOne({resetPasswordLink: token}, function(err, success){
+            if(err){
+                return res.status(400).json({error: "reset password link error"})
+            } else {
+                sgMail.send(emailData)
+                .then(()=>{
+                    return res.json({
+                        message:`Email has been sent to ${email}`
+                    });
+                }).catch(err=>{
+                    return res.status(400).json({
+                        errors: errorHandler(err)
+                    })
                 })
-            });
-        } catch (error) {
-            return res.status(400).json({
-                errors: errorHandler(error)
-            })
-        }
+            }
+        })
     },
 
-    async ResetPassword(req, res) {
-        const {password, confirm_password} = req.body; 
+    async resetPassword(req, res) {
+        const {newPassword, resetPasswordLink} = req.body; 
+        console.log(newPassword);
+
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()){
+            const firstError = errors.array().map(error => error.msg)[0];
+            return res.status(422).json({
+                errors: firstError
+            });
+        } else {
+            if (resetPasswordLink){
+                jwt.verify(resetPasswordLink, process.env.JWT_RESET_PASSWORD, function(err, decoded){
+                    if(err){
+                        return res.status(400).json({
+                            error: 'Expired Link. Try Again'
+                        });
+                    }
+                })
+            }
+            
+            const hashedPassword = await bcrypt.hash(newPassword,12);
+
+            await User.findOne({resetPasswordLink},(err, user)=>{
+                if(err||!user){
+                    return res.status(400).json({ error: 'Something went wrong. Try later' });
+                }
+                const updatingFields = {password: hashedPassword, resetPasswordLink: ''};
+
+                user = _.assignIn(user, updatingFields);
+                user.save((err, result)=>{
+                    if (err) return res.status(400).json({error: 'Error while resetting new password'})
+                    else return res.status(200).json({message: 'Password Changed'})
+                })
+
+            })
+        }
+        
     }
 }

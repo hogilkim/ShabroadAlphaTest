@@ -42,3 +42,6 @@ July 14:
 July 15:
     working on password reseting. finished sending email for user who want to reset password.
     need to work on ResetPassword page & backend password reset.
+
+July 16:
+    finished reset password frontend & backend

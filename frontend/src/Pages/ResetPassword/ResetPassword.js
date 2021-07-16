@@ -1,36 +1,41 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react';
 import { Container, Typography, Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box} from '@material-ui/core';
 import {Alert} from '@material-ui/lab'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles';
 import {useDispatch} from 'react-redux';
-import {} from '../../actions/auth'
+import {ReduxResetPassword} from '../../actions/auth'
+
 
 const ResetPassword = ({match}) => {
     // const history = useHistory();
     const classes = useStyles();
+    const dispatch = useDispatch();
+
 
     const [resetData, setResetData] = useState({password:'', confirm_password:'', token:''})
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(()=>{
-        let token = match.params.token
+        let token = match.params.token;
         if(token){
-            setFormData({...FormData, token})
+          setResetData({...resetData, token})
         }
-    })
+    },[])
 
     const handleChange = (e) => {
         setResetData({...resetData, [e.target.name]: e.target.value});
+        console.log(resetData);
+
 
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        console.log(resetData);
         if(resetData.password && resetData.confirm_password){
             if(resetData.password === resetData.confirm_password){
-                dispatch(ReduxResetPassword(resetData))
+                dispatch(ReduxResetPassword({newPassword: resetData.password, resetPasswordLink: resetData.token }))
             } else {
             setError(true);
             setErrorMessage("비밀번호가 다릅니다. 다시 확인하여 주십시오"); //confirm password wrong message

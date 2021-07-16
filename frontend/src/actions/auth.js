@@ -50,9 +50,9 @@ export const ReduxForgetPassword = (email) => async(dispatch) => {
 
 export const ReduxResetPassword = (resetData) => async (dispatch) => {
     try {
-        const {data} = await api.
+        const {data} = await api.resetPassword(resetData);
         dispatch({type: RESETPASSWORD, data});
     } catch (error) {
-        
+        console.log(error);
     }
 }

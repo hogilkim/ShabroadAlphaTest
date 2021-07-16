@@ -1,4 +1,4 @@
-import { LOGIN, SIGNUP, ACTIVATION, FORGETPASSWORD } from "../constants/actionTypes";
+import { LOGIN, SIGNUP, ACTIVATION, FORGETPASSWORD, RESETPASSWORD } from "../constants/actionTypes";
 import {authenticate} from "../helpers/auth"
 
 const authReducer = (state = {authData: null}, action) => {
@@ -16,6 +16,9 @@ const authReducer = (state = {authData: null}, action) => {
             console.log("reducer: ", state);
             return {...state, authData: action?.data};
         case FORGETPASSWORD:
+            console.log("reducer: ", state);
+            return {...state, authData: action?.data};
+        case RESETPASSWORD:
             console.log("reducer: ", state);
             return {...state, authData: action?.data};
         default:

@@ -6,3 +6,4 @@ export const login = (loginData) => api.post('/user/login', loginData);
 export const signup = (signupData) => api.post('/user/signup', signupData);
 export const activation = (activationData) => api.post('/user/activation', activationData);
 export const forgetPassword = (email) => api.post('/user/forgetPassword', email);
+export const resetPassword = (resetData) => api.put('/user/resetPassword', resetData);

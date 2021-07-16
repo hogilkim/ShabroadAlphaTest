@@ -28,7 +28,7 @@ const App = () => {
                     <Route path= '/signup' exact component={SignUp} />
                     <Route path= '/user/activate/:token' exact component={Activate}/>
                     <Route path= '/user/password/forget' exact component={ForgetPassword} />
-                    <Route path= '/user/password/reset' exact component={ResetPassword} />
+                    <Route path= '/user/password/reset/:token' exact component={ResetPassword} />
                     <Route component={NotFound}/>   //Not Found Page if wrong url
                 </Switch>
             </Container>

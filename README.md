@@ -45,3 +45,9 @@ July 15:
 
 July 16:
     finished reset password frontend & backend
+
+July 17:
+    start dashboard
+
+July 19:
+    imported google map in frontend using npm library's react-google-maps.

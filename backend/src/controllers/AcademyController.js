@@ -16,7 +16,6 @@ module.exports = {
             email,
             location,
             nearby_amenity,
-            capacity,
             rating,
             academy_pictures: array
         })

@@ -42,11 +42,15 @@ module.exports = {
         await academy.updateOne({ $push: {programs: academy_program._id}})
 
         return res.json(academy_program);
+
+
     }, async searchPrograms(req, res){
         const { city, hashtags } = req.body;
 
+        let programs = {};
         try {
-            const programs = await AcademyProgram.find({$and: [{city: city}, {hashtag: {$all: hashtags.split(',')}}]});
+            if(city) {programs = await AcademyProgram.find({$and: [{city: city}, {hashtag: {$all: hashtags.split(',')}}]});}
+            else if(!city) {programs = await AcademyProgram.find({hashtag: {$all: hashtags.split(',')}});}
             res.json({data: programs})
         } catch(error){
             res.status(404).json({message: error.message});

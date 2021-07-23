@@ -14,5 +14,7 @@ routes.get('/', (req, res) => {
 
 
 
-routes.post('/createAcademy', upload.array("files", 11), AcademyController.createAcademy) //
+// routes.post('/createAcademy', upload.array("files", 11), AcademyController.createAcademy) //! this is the OG
+routes.post('/createAcademy', AcademyController.createAcademy);
+routes.post('/createProgram', AcademyController.createProgram);
 module.exports = routes;

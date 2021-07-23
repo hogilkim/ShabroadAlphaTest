@@ -51,3 +51,11 @@ July 17:
 
 July 19:
     imported google map in frontend using npm library's react-google-maps.
+
+July 22:
+    Went to hospital :(
+    updated Academy Schema
+
+July 23:
+    added AcademyProgram schema
+    can add academy & programs through POST request

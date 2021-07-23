@@ -4,7 +4,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps
 function MapSetting(){
     return(
         <GoogleMap 
-            defaultZoom={10}
+            defaultZoom={15}
             center={{lat:40.694354, lng: -73.98545}}        //use this to change the center.
         >
         <Marker position={{lat:40.694354773743235, lng: -73.98545374180934}}/>

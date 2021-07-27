@@ -18,4 +18,5 @@ routes.get('/', (req, res) => {
 routes.post('/createAcademy', AcademyController.createAcademy);
 routes.post('/createProgram', AcademyController.createProgram);
 routes.get('/searchPrograms', AcademyController.searchPrograms);
+routes.get('/getPrograms', AcademyController.getPrograms);
 module.exports = routes;

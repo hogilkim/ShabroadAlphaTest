@@ -60,3 +60,8 @@ July 23:
     added AcademyProgram schema
     can add academy & programs through POST request
     search by hashtag finished
+
+July 27:
+    working on search result page (searching language programs)
+    created new redux - getting academy programs. Redux not working.
+    why?? cannot set redux's program state in reducer.

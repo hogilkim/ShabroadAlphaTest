@@ -11,9 +11,10 @@ import NotFound from "./Pages/NotFound";
 import MyPage from "./Pages/MyPage/MyPage";
 import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
-import Activate from "./Pages/Activate/Activate"
-import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword"
-import ResetPassword from "./Pages/ResetPassword/ResetPassword"
+import Activate from "./Pages/Activate/Activate";
+import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword";
+import ResetPassword from "./Pages/ResetPassword/ResetPassword";
+import SearchPrograms from "./Pages/SearchPrograms/SearchPrograms";
 
 const App = () => {
     return (
@@ -26,6 +27,7 @@ const App = () => {
                     <Route path= '/mypage' exact component={MyPage} />
                     <Route path= '/login' exact component={Login} />
                     <Route path= '/signup' exact component={SignUp} />
+                    <Route path= '/searchPrograms' exact component={SearchPrograms} />
                     <Route path= '/user/activate/:token' exact component={Activate}/>
                     <Route path= '/user/password/forget' exact component={ForgetPassword} />
                     <Route path= '/user/password/reset/:token' exact component={ResetPassword} />

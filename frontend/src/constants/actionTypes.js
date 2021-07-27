@@ -3,3 +3,5 @@ export const SIGNUP = 'SIGNUP'
 export const ACTIVATION = 'ACTIVATION';
 export const FORGETPASSWORD = 'FORGETPASSWORD'
 export const RESETPASSWORD = 'RESETPASSWORD'
+
+export const GET_ALL_PROGRAMS = 'GET_ALL_PROGRAMS'

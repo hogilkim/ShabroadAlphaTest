@@ -47,12 +47,27 @@ module.exports = {
     }, async searchPrograms(req, res){
         const { city, hashtags } = req.body;
 
-        let programs = {};
         try {
-            if(city) {programs = await AcademyProgram.find({$and: [{city: city}, {hashtag: {$all: hashtags.split(',')}}]});}
-            else if(!city) {programs = await AcademyProgram.find({hashtag: {$all: hashtags.split(',')}});}
-            res.json({data: programs})
+            if(city) {
+                const programs = await AcademyProgram.find({$and: [{city: city}, {hashtag: {$all: hashtags.split(',')}}]});
+                res.json({data: programs})
+            }
+            else if(!city) {
+                const programs = await AcademyProgram.find({hashtag: {$all: hashtags.split(',')}});
+                res.json({data: programs})
+        }
+            
         } catch(error){
+            res.status(404).json({message: error.message});
+        }
+    }, async getPrograms(req, res){
+        try {
+            const programs = await AcademyProgram.find();
+
+            console.log("programs:" , programs);
+
+            res.status(200).json(programs);
+        } catch (error) {
             res.status(404).json({message: error.message});
         }
     }

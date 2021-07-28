@@ -65,3 +65,7 @@ July 27:
     working on search result page (searching language programs)
     created new redux - getting academy programs. Redux not working.
     why?? cannot set redux's program state in reducer.
+
+July 28:
+    Fixed Redux problem!
+    problem: before data was loaded, Program component tried to access to the data.

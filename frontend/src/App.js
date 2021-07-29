@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import React from 'react';
 import { Container} from '@material-ui/core';
 
@@ -14,9 +14,11 @@ import SignUp from "./Pages/SignUp/SignUp";
 import Activate from "./Pages/Activate/Activate";
 import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
-import SearchPrograms from "./Pages/SearchPrograms/SearchPrograms";
+import Programs from "./Pages/Programs/Programs";
+import ProgramDetails from "./Pages/ProgramDetails/ProgramDetails";
 
 const App = () => {
+    const user = JSON.parse(localStorage.getItem('user'))
     return (
         <BrowserRouter>
             <Container>
@@ -25,12 +27,13 @@ const App = () => {
                     <Route path= '/' exact component={Home} />
                     <Route path= '/about' exact component={About} />
                     <Route path= '/mypage' exact component={MyPage} />
-                    <Route path= '/login' exact component={Login} />
+                    <Route path= '/login' exact component={()=>(!user?<Login/> : <Redirect to="/" />)} />
                     <Route path= '/signup' exact component={SignUp} />
-                    <Route path= '/searchPrograms' exact component={SearchPrograms} />
                     <Route path= '/user/activate/:token' exact component={Activate}/>
                     <Route path= '/user/password/forget' exact component={ForgetPassword} />
                     <Route path= '/user/password/reset/:token' exact component={ResetPassword} />
+                    <Route path= '/programs' exact component={Programs} />
+                    <Route path= '/program/:id' exact component={ProgramDetails} />
                     <Route component={NotFound}/>   //Not Found Page if wrong url
                 </Switch>
             </Container>

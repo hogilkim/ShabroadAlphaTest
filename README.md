@@ -69,3 +69,6 @@ July 27:
 July 28:
     Fixed Redux problem!
     problem: before data was loaded, Program component tried to access to the data.
+
+July 29:
+    working on search program: frontend

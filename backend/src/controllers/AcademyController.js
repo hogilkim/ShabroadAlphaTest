@@ -45,17 +45,17 @@ module.exports = {
 
 
     }, async searchPrograms(req, res){
-        const { city, hashtags } = req.body;
-
-        try {
-            if(city) {
+        const {city, hashtags} = req.query;
+                try {
+            if(city!=='none') {
                 const programs = await AcademyProgram.find({$and: [{city: city}, {hashtag: {$all: hashtags.split(',')}}]});
+                console.log("search programs", programs)
                 res.json({data: programs})
             }
-            else if(!city) {
+            else if(city=='none') {
                 const programs = await AcademyProgram.find({hashtag: {$all: hashtags.split(',')}});
                 res.json({data: programs})
-        }
+            }
             
         } catch(error){
             res.status(404).json({message: error.message});
@@ -64,7 +64,7 @@ module.exports = {
         try {
             const programs = await AcademyProgram.find();
 
-            console.log("programs:" , programs);
+            // console.log("programs:" , programs);
 
             res.status(200).json(programs);
         } catch (error) {

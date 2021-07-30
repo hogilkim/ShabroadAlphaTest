@@ -6,7 +6,7 @@ import _ from "lodash";
 
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-import {getAllPrograms} from '../../actions/searchPrograms';
+import {getAllPrograms, getProgramsBySearch} from '../../actions/searchPrograms';
 
 import Program from '../../components/Program/Program';
 import Pagination from '../../components/Pagination/Paginate';
@@ -26,12 +26,10 @@ const SearchPrograms = () => {
     const page = query.get('page') || 1;
     const searchQuery = query.get('searchQuery')
 
-    const [search, setSearch] = useState('');
+    const [searchOptions, setSearchOptions] = useState({hashtags:"", city:""});
 
     useEffect(()=>{
-        console.log("will dispatch")
         dispatch(getAllPrograms())
-        
     }, [dispatch])
     
     useEffect(()=>{
@@ -39,9 +37,17 @@ const SearchPrograms = () => {
         else setLoadState(false);
     },[programs])
     
+
+    const searchProgram = () => {
+        if(searchOptions){
+            dispatch(getProgramsBySearch(searchOptions))
+        } else {
+            history.push('/programs')
+        }
+    }
+
     const handleChange = (e) => {
-        setSearch(e.target.value);
-        console.log(search);
+        setSearchOptions({...searchOptions, [e.target.name]: e.target.value});
     }
 
     return (
@@ -51,7 +57,7 @@ const SearchPrograms = () => {
                     {!loadState ? <CircularProgress /> : 
                     (
                         <Grid className = {classes.container} container alignItems="stretch" spacing ={3}>
-                            {programs.data.map((program) => (
+                            {programs[0].map((program) => (
                                 <Grid key={program._id} item xs={12} sm={6}>
                                     <Program program={program} />
                                 </Grid>
@@ -62,13 +68,20 @@ const SearchPrograms = () => {
                 <Grid item xs={12} sm={6} md = {3}>
                     <AppBar className ={classes.appBarSearch} position = "static" color = "inherit">
                         <TextField
-                            name = "search"
+                            name = "hashtags"
+                            variant = "outlined"
+                            label="Program Hashtags"
+                            fullWidth
+                            onChange={handleChange}
+                            />
+                        <TextField
+                            name = "city"
                             variant = "outlined"
                             label="Search Programs"
                             fullWidth
                             onChange={handleChange}
                             />
-
+                        <Button onClick ={searchProgram} className={classes.searchButton} variant="contained" color="primary">Search</Button>
                     </AppBar>
                 </Grid>
                 <Paper className={classes.pagination} elevation={6}>

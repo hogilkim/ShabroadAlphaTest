@@ -21,7 +21,7 @@ const SearchPrograms = () => {
     const history = useHistory();
     const classes = useStyles();
     const dispatch = useDispatch();    
-    const programs = useSelector((state)=>state.searchPrograms)
+    const programs = useSelector((state)=>state.searchPrograms.programs)
 
     const page = query.get('page') || 1;
     const searchQuery = query.get('searchQuery')
@@ -41,6 +41,7 @@ const SearchPrograms = () => {
     const searchProgram = () => {
         if(searchOptions){
             dispatch(getProgramsBySearch(searchOptions))
+            history.push(`/programs?hashtags=${searchOptions.hashtags||'none'}&city=${searchOptions.city||'none'}`)
         } else {
             history.push('/programs')
         }
@@ -57,7 +58,7 @@ const SearchPrograms = () => {
                     {!loadState ? <CircularProgress /> : 
                     (
                         <Grid className = {classes.container} container alignItems="stretch" spacing ={3}>
-                            {programs[0].map((program) => (
+                            {programs.map((program) => (
                                 <Grid key={program._id} item xs={12} sm={6}>
                                     <Program program={program} />
                                 </Grid>

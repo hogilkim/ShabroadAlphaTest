@@ -4,19 +4,12 @@ import {GET_ALL_PROGRAMS, GET_PROGRAMS_BY_SEARCH} from '../constants/actionTypes
 //     data: []
 // }
 
-const programsReducer = (state=[], action) => {
+const programsReducer = (state= {isLoading: true, programs:[]}, action) => {
     switch(action.type) {
         case GET_ALL_PROGRAMS:
-            // console.log("reducer: ", action)
-            return [
-                ...state,
-                action.payload
-                ];
+            return {...state, programs: action.payload};
         case GET_PROGRAMS_BY_SEARCH:
-            console.log("reducer GET_PROGRAMS_BY_SEARCH: ", action)
-            return [
-                ...state, action.payload
-            ];
+            return {...state, programs: action.payload.data};
         default:
             return state;
     }

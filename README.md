@@ -72,3 +72,9 @@ July 28:
 
 July 29:
     working on search program: frontend
+
+July 30:
+    finished transferring searching program data from backend to frontend. 
+    One thing learned: do not use req.body when making a get request.
+
+    finished showing search result to frontend.

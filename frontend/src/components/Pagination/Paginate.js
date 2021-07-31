@@ -1,10 +1,15 @@
 import React, {useEffect} from 'react'
 import {Pagination, PaginationItem} from '@material-ui/lab'
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import useStyles from './styles'
 import {useDispatch, useSelector} from 'react-redux';
 
 import { getAllPrograms } from '../../actions/searchPrograms';
+
+
+function useQuery(){
+    return new URLSearchParams(useLocation().search);
+}
 
 const Paginate = ({page}) => {
     const classes = useStyles();
@@ -12,10 +17,12 @@ const Paginate = ({page}) => {
 
     const numberOfPages =  useSelector((state)=>state.searchPrograms.numberOfPages)
 
-    console.log("pagination: ", numberOfPages);
+    const query = useQuery();
+    const hashtags = query.get('hashtags');
+    const city = query.get('city');
 
     useEffect(()=> {
-        if(page) dispatch(getAllPrograms(page))
+        if(page && !(city&&hashtags)) dispatch(getAllPrograms(page))
     },[page])
 
     return (

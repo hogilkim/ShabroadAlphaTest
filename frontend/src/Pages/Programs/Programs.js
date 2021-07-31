@@ -2,11 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {useHistory, useLocation} from 'react-router-dom';
 import {Container, Grid, CircularProgress, Paper, AppBar, TextField, Button, Grow} from '@material-ui/core';
 import useStyles from './styles';
-import _ from "lodash";
 
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-import {getAllPrograms, getProgramsBySearch} from '../../actions/searchPrograms';
+import { getProgramsBySearch} from '../../actions/searchPrograms';
 
 import Program from '../../components/Program/Program';
 import Pagination from '../../components/Pagination/Paginate';
@@ -15,43 +14,53 @@ function useQuery(){
     return new URLSearchParams(useLocation().search);
 }
 
-const SearchPrograms = () => {
-    const [loadState, setLoadState] = useState(false);
+const Programs = () => {
     const query = useQuery();
     const history = useHistory();
     const classes = useStyles();
     const dispatch = useDispatch();    
-    const programs = useSelector((state)=>state.searchPrograms.programs)
+    const {programs, isLoading, numberOfPages} = useSelector((state)=>state.searchPrograms)
 
     const page = query.get('page') || 1;
-    const searchQuery = query.get('searchQuery')
-
+    
     const [searchOptions, setSearchOptions] = useState({hashtags:"", city:""});
-    
-    useEffect(()=>{
-        if(!_.isEmpty(programs)) setLoadState(true);
-        else setLoadState(false);
-    },[programs])
-    
 
+    useEffect(()=>{
+        const hashtags = query.get('hashtags');
+        const city = query.get('city');
+
+        if (hashtags || city){
+            searchOptions.hashtags = hashtags;
+            searchOptions.city = city;
+            console.log(searchOptions)
+            dispatch(getProgramsBySearch(searchOptions))
+        }
+    },[])
+
+    
     const searchProgram = () => {
         if(searchOptions){
             dispatch(getProgramsBySearch(searchOptions))
-            history.push(`/programs?hashtags=${searchOptions.hashtags||'none'}&city=${searchOptions.city||'none'}`)
+            history.push(`/programs/search?hashtags=${searchOptions.hashtags||'none'}&city=${searchOptions.city||'none'}`)
         } else {
             history.push('/programs')
         }
     }
 
+
+    
     const handleChange = (e) => {
         setSearchOptions({...searchOptions, [e.target.name]: e.target.value});
     }
+
+
+    if (!programs.length && !isLoading) return 'No Programs'
 
     return (
         <Grow in>
             <Container>
                 <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
-                    {!loadState ? <CircularProgress /> : 
+                    {isLoading ? <CircularProgress /> : 
                     (
                         <Grid className = {classes.container} container alignItems="stretch" spacing ={3}>
                             {programs.map((program) => (
@@ -82,11 +91,12 @@ const SearchPrograms = () => {
                     </AppBar>
                 </Grid>
                 <Paper className={classes.pagination} elevation={6}>
-                    <Pagination page={page}/>
+                        <Pagination page={page}/>
                 </Paper>
+                
             </Container>
         </Grow>
     )
 }
 
-export default SearchPrograms
+export default Programs

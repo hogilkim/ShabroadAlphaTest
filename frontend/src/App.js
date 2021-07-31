@@ -33,7 +33,7 @@ const App = () => {
                     <Route path= '/user/password/forget' exact component={ForgetPassword} />
                     <Route path= '/user/password/reset/:token' exact component={ResetPassword} />
                     <Route path= '/programs' exact component={Programs} />
-                    {/* <Route path= '/programs/search' exact component={Programs} /> */}
+                    <Route path= '/programs/search' exact component={Programs} />
                     <Route path= '/program/:id' exact component={ProgramDetails} />
                     <Route component={NotFound}/>   //Not Found Page if wrong url
                 </Switch>

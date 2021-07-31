@@ -81,3 +81,4 @@ July 30:
 
 July 31:
     applied "pagination" for getting all programs. limit of programs in one page: 8. if want to see more, need to go to the next page.
+    Made new page: program details. Now users can see details about a certain program (clicked from Programs page)

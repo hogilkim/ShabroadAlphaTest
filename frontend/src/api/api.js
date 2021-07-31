@@ -11,3 +11,4 @@ export const resetPassword = (resetData) => api.put('/user/resetPassword', reset
 
 export const getAllPrograms = (page)=>api.get(`/getPrograms?page=${page}`);
 export const searchPrograms = (searchOptions) => api.get(`/searchPrograms?hashtags=${searchOptions.hashtags||'none'}&city=${searchOptions.city||'none'}`);
+export const getProgram = (id) => api.get(`/program/${id}`);

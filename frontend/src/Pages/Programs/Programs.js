@@ -27,10 +27,6 @@ const SearchPrograms = () => {
     const searchQuery = query.get('searchQuery')
 
     const [searchOptions, setSearchOptions] = useState({hashtags:"", city:""});
-
-    useEffect(()=>{
-        dispatch(getAllPrograms())
-    }, [dispatch])
     
     useEffect(()=>{
         if(!_.isEmpty(programs)) setLoadState(true);

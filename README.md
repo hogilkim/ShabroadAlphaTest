@@ -80,4 +80,4 @@ July 30:
     finished showing search result to frontend.
 
 July 31:
-    applied "pagination" for getting all programs.
+    applied "pagination" for getting all programs. limit of programs in one page: 8. if want to see more, need to go to the next page.

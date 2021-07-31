@@ -61,12 +61,19 @@ module.exports = {
             res.status(404).json({message: error.message});
         }
     }, async getPrograms(req, res){
+        const {page} = req.query
+
         try {
-            const programs = await AcademyProgram.find();
+            const LIMIT = 8;
+            const startIndex = (Number(page)-1) * LIMIT; 
+
+            const totalProgramsNum = await AcademyProgram.countDocuments({});
+
+            const programs = await AcademyProgram.find().sort({_id:-1, }).limit(LIMIT).skip(startIndex);;
 
             // console.log("programs:" , programs);
 
-            res.status(200).json(programs);
+            res.status(200).json({data: programs, currentPage: Number(page), numberOfPages:Math.ceil(totalProgramsNum/LIMIT)});
         } catch (error) {
             res.status(404).json({message: error.message});
         }

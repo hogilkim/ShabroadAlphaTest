@@ -8,15 +8,15 @@ const Navbar = () => {
     const classes = useStyles();
 
     const user = localStorage.getItem('user');
-    console.log("Navbar: ", user);
+    // console.log("Navbar: ", user);
 
     return (
         <>
         <AppBar className = {classes.appBar} position="static" color="inherit">
-            <div className={classes.brandContainer}>
+            <Link to="/" className={classes.brandContainer}>
                 <Typography className = {classes.heading} variant="h2" align="center">Alpha Test</Typography>
 
-            </div>
+            </Link>
         </AppBar>
         <Toolbar className = {classes.toolbar}>
             {user? (<Button component={Link} to="/mypage" variant="contained" color="primary">마이페이지</Button>)

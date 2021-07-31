@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+// import {useHistory} from 'react-router-dom';
 import { Container, Typography, Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {Alert} from '@material-ui/lab'
+// import {Alert} from '@material-ui/lab'
 
 import useStyles from './styles';
 
@@ -13,7 +13,7 @@ import Copyright from '../../components/Copyright/Copyright'
 
 
 const ForgetPassword = () => {
-    const history = useHistory();
+    // const history = useHistory();
     const [email, setEmail] = useState("");
 
     const dispatch = useDispatch();

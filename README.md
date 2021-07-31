@@ -78,3 +78,6 @@ July 30:
     One thing learned: do not use req.body when making a get request.
 
     finished showing search result to frontend.
+
+July 31:
+    applied "pagination" for getting all programs.

@@ -54,12 +54,12 @@ const SearchPrograms = () => {
     return (
         <Grow in>
             <Container>
-                <Grid container justify="space-between" alignItems="stretch" spacing={3}>
+                <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
                     {!loadState ? <CircularProgress /> : 
                     (
                         <Grid className = {classes.container} container alignItems="stretch" spacing ={3}>
                             {programs.map((program) => (
-                                <Grid key={program._id} item xs={12} sm={6}>
+                                <Grid key={program._id} item xs={12} sm={6} lg={3}>
                                     <Program program={program} />
                                 </Grid>
                             ))}
@@ -78,7 +78,7 @@ const SearchPrograms = () => {
                         <TextField
                             name = "city"
                             variant = "outlined"
-                            label="Search Programs"
+                            label="City"
                             fullWidth
                             onChange={handleChange}
                             />
@@ -86,7 +86,7 @@ const SearchPrograms = () => {
                     </AppBar>
                 </Grid>
                 <Paper className={classes.pagination} elevation={6}>
-                    <Pagination/>
+                    <Pagination page={page}/>
                 </Paper>
             </Container>
         </Grow>

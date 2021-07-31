@@ -9,7 +9,7 @@ import useStyles from './styles';
 import {useDispatch} from 'react-redux';
 import {ReduxSignup} from '../../actions/auth'
 
-import Copyright from '../../components/Copyright/Copyright'
+// import Copyright from '../../components/Copyright/Copyright'
 
 
 

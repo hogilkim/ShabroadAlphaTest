@@ -7,5 +7,7 @@ export const signup = (signupData) => api.post('/user/signup', signupData);
 export const activation = (activationData) => api.post('/user/activation', activationData);
 export const forgetPassword = (email) => api.post('/user/forgetPassword', email);
 export const resetPassword = (resetData) => api.put('/user/resetPassword', resetData);
-export const getAllPrograms = ()=>api.get('/getPrograms');
+
+
+export const getAllPrograms = (page)=>api.get(`/getPrograms?page=${page}`);
 export const searchPrograms = (searchOptions) => api.get(`/searchPrograms?hashtags=${searchOptions.hashtags||'none'}&city=${searchOptions.city||'none'}`);

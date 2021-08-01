@@ -2,7 +2,11 @@ import {handleActions} from 'redux-actions';
 import * as api from '../api/api';
 
 
-import {GET_ALL_PROGRAMS, GET_PROGRAMS_BY_SEARCH, GET_PROGRAM, START_LOADING, END_LOADING} from '../constants/actionTypes';
+const GET_ALL_PROGRAMS = 'searchPrograms/GET_ALL_PROGRAMS'
+const GET_PROGRAM = 'searchPrograms/GET_PROGRAM'
+const GET_PROGRAMS_BY_SEARCH = 'searchPrograms/GET_PROGRAMS_BY_SEARCH'
+const START_LOADING = 'searchPrograms/START_LOADING'
+const END_LOADING = 'searchPrograms/END_LOADING'
 
 export const getAllPrograms = (page) => async (dispatch) => {
 

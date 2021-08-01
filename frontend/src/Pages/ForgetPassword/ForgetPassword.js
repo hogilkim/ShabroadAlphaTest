@@ -7,7 +7,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles';
 
 import {useDispatch} from 'react-redux'
-import {ReduxForgetPassword} from '../../actions/auth'
+import {ReduxForgetPassword} from '../../ReduxModules/auth'
 
 import Copyright from '../../components/Copyright/Copyright'
 

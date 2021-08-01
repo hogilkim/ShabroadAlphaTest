@@ -8,7 +8,7 @@ import {Alert} from '@material-ui/lab'
 import useStyles from './styles';
 
 import {useDispatch} from 'react-redux'
-import {ReduxLogin} from '../../actions/auth'
+import {ReduxLogin} from '../../ReduxModules/auth'
 
 import Copyright from '../../components/Copyright/Copyright'
 

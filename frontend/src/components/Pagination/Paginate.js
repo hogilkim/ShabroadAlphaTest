@@ -4,7 +4,7 @@ import {Link, useLocation} from 'react-router-dom'
 import useStyles from './styles'
 import {useDispatch, useSelector} from 'react-redux';
 
-import { getAllPrograms } from '../../reducers/searchPrograms';
+import { getAllPrograms } from '../../ReduxModules/searchPrograms';
 
 
 function useQuery(){

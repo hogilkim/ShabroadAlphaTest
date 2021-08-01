@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import {reducers} from './reducers';
+import {reducers} from './ReduxModules/index';
 
 import App from './App';
 

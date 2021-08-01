@@ -5,7 +5,7 @@ import useStyles from './styles';
 
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-import { getProgramsBySearch} from '../../reducers/searchPrograms';
+import { getProgramsBySearch} from '../../ReduxModules/searchPrograms';
 
 import Program from '../../components/Program/Program';
 import Pagination from '../../components/Pagination/Paginate';

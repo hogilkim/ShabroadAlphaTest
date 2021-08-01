@@ -4,7 +4,7 @@ import {Alert} from '@material-ui/lab'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './styles';
 import {useDispatch} from 'react-redux';
-import {ReduxResetPassword} from '../../actions/auth'
+import {ReduxResetPassword} from '../../ReduxModules/auth'
 
 
 const ResetPassword = ({match}) => {

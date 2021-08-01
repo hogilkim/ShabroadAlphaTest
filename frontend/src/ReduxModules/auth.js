@@ -1,5 +1,14 @@
-import {LOGIN, SIGNUP, ACTIVATION, FORGETPASSWORD, RESETPASSWORD} from '../constants/actionTypes'
+import {authenticate} from "../helpers/auth"
 import * as api from '../api/api';
+import {handleActions} from 'redux-actions';
+
+
+const LOGIN = 'auth/LOGIN';
+const SIGNUP = 'auth/SIGNUP'
+const ACTIVATION = 'auth/ACTIVATION';
+const FORGETPASSWORD = 'auth/FORGETPASSWORD'
+const RESETPASSWORD = 'auth/RESETPASSWORD'
+
 
 export const ReduxLogin = (loginData, setLoginSuccess, history) => async (dispatch) => {
     try {
@@ -7,7 +16,6 @@ export const ReduxLogin = (loginData, setLoginSuccess, history) => async (dispat
         setLoginSuccess(true);
         dispatch({type: LOGIN, data})
         setTimeout(()=>history.push('/'), 2000)
-        
         
     } catch (error) {
         setLoginSuccess(false);
@@ -56,3 +64,28 @@ export const ReduxResetPassword = (resetData) => async (dispatch) => {
         console.log(error);
     }
 }
+
+const initialState = {
+    authData: null
+}
+
+const authReducer = handleActions(
+    {
+        [LOGIN] : (state, action)=>{
+            authenticate(action);
+            return {...state, authData: action?.data}
+        },        
+        [SIGNUP]: (state, action)=> ({
+            ...state, authData: action?.data}),
+        [ACTIVATION]: (state, action)=> ({
+            ...state, authData: action?.data}),
+        [FORGETPASSWORD]: (state, action)=> ({
+            ...state, authData: action?.data}),
+        [RESETPASSWORD]: (state, action)=> ({
+            ...state, authData: action?.data})
+    },
+    initialState
+);
+
+export default authReducer;
+

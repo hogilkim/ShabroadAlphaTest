@@ -83,3 +83,6 @@ July 31:
     applied "pagination" for getting all programs. limit of programs in one page: 8. if want to see more, need to go to the next page.
     Made new page: program details. Now users can see details about a certain program (clicked from Programs page)
     programs/search/QUERIES page can be accessed just by typing queries. No need to search & enter. (in other words, if user directly access http://localhost:3000/programs/search?hashtags=GRE,TOEFL&city=New%20York, frontend shows search results )
+
+August 1:
+    Combined all redux components (actions, reducers, and constants) into one module (ReduxModules)

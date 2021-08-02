@@ -37,7 +37,6 @@ export const getProgram = (id) => async(dispatch)=>{
     try {
         dispatch({type: START_LOADING});
         const {data} = await api.getProgram(id);
-        console.log("action: ", data)
         dispatch({type: GET_PROGRAM, payload: data})
         dispatch({type: END_LOADING});
     } catch (error) {

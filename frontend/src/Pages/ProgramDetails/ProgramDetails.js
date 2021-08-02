@@ -8,22 +8,16 @@ import {getProgram} from '../../ReduxModules/searchPrograms'
 import useStyles from './styles'
 
 const ProgramDetails = () => {
-    const {program, programs, isLoading} = useSelector((state)=>state.searchPrograms);
+    const {program, isLoading} = useSelector((state)=>state.searchPrograms);
     const dispatch = useDispatch();
     const history = useHistory();
     const classes = useStyles();
     const {id} = useParams();
+    var type = (program.program_type == "WEEKLY" ? "주":"텀");
 
     useEffect(()=>{
         dispatch(getProgram(id));
-        console.log("program details", program)
     },[id])
-
-    let type = "";
-    useEffect(()=>{
-        if(program.program_type == "WEEKLY") type = "주";
-        else if (program.program_type == "FIXED") type = "텀"
-    }, [program])
 
     
     console.log("program detail page", program)
@@ -46,7 +40,7 @@ const ProgramDetails = () => {
 
           <Typography variant="h3" component="h2">{program.program_name}</Typography>
           <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{program.hashtag.map((tag) => `#${tag} `)}</Typography>
-          <Typography gutterBottom variant="h6" color="textSecondary" component="h2">가격 {program.unit_price.map((unit) => `${unit.period}${type} : ${unit.unit_price} `)}</Typography>
+          <Typography gutterBottom variant="h6" color="textSecondary" component="h2">가격 {program.unit_price.map((unit) => `${unit.period}${type} : ${unit.unit_price}$ `)}</Typography>
           <Typography gutterBottom variant="body1" component="p">{program.program_type}</Typography>
           <Typography variant="h6">City: {program.city}</Typography>
           <Divider style={{ margin: '20px 0' }} />

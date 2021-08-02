@@ -86,3 +86,6 @@ July 31:
 
 August 1:
     Combined all redux components (actions, reducers, and constants) into one module (ReduxModules)
+
+August 2:
+    Some small fixes: Program details page does not show whether the program is weekly based or term based. Now fixed.

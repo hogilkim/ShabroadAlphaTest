@@ -89,3 +89,9 @@ August 1:
 
 August 2:
     Some small fixes: Program details page does not show whether the program is weekly based or term based. Now fixed.
+
+August 6:
+    start working on main page. Users will be able to search.
+
+August 7:
+    still working on main page, but I don't have any css basis. Need to learn css first.

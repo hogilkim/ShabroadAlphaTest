@@ -40,7 +40,7 @@ export const getProgram = (id) => async(dispatch)=>{
         dispatch({type: GET_PROGRAM, payload: data})
         dispatch({type: END_LOADING});
     } catch (error) {
-        
+        console.log(error.message);
     }
 }
 

@@ -95,3 +95,8 @@ August 6:
 
 August 7:
     still working on main page, but I don't have any css basis. Need to learn css first.
+
+August 9:
+    implementing searching academies by city in home. Now, frontend sends city info to backend, then backend sends response to frontend, and it stores to the redux.
+
+    NEED TO WORK FOR TOMORROW: show results in "Academy" page.

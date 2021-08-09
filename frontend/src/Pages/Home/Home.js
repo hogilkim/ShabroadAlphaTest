@@ -1,8 +1,14 @@
 import React, {useState, useRef} from 'react';
-import {Menu, Grid, Button, ButtonGroup, ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList, Typography} from "@material-ui/core"
+import {Input, Menu, Grid, Button, ButtonGroup, ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList, Typography} from "@material-ui/core"
 import SearchIcon from '@material-ui/icons/Search';
 import Map from '../../components/Map/Map';
 import { makeStyles, useTheme, withTheme } from '@material-ui/core/styles';
+
+import {useDispatch} from 'react-redux';
+import {useHistory, useLocation} from 'react-router-dom';
+
+
+import { getAcademiesBySearch } from '../../ReduxModules/searchAcademies';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -52,6 +58,8 @@ const cityOptions= {
 
 const Home = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
@@ -59,6 +67,7 @@ const Home = () => {
 
     const [city, setCity] = useState("어디에서 공부하고 싶으신가요?")
 
+    
 
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -75,8 +84,21 @@ const Home = () => {
         // setSelectedIndex(index);
         setCity(city);
         setOpen(false);
-        };
+    };
 
+
+    const handleChange = (e) =>{
+        setCity(e.target.value);
+    }
+
+    const searchAcademy = (e)=>{
+        if(city){
+            dispatch(getAcademiesBySearch(city));
+            history.push(`/academies/search?city=${city}`)
+        } else {
+            history.push('/academies')
+        }
+    }
     return (
         <>
         <div className={classes.search_container}>
@@ -85,10 +107,11 @@ const Home = () => {
             alt= "Shabroad Icon"/>
             
             <div className={classes.search_center}>
-                <input className={classes.search_input} type='text' placeholder="도시를 선택해주세요" />
+                <Input onChange={handleChange} className={classes.search_input} type='text' placeholder="도시를 선택해주세요" />
                 <SearchIcon/>
             </div>
             <div className={classes.search_right}>
+                <Button onClick={searchAcademy}>검색</Button>
                 <Button>나에게 맞는 프로그램 찾기</Button>
             </div>
 

@@ -16,6 +16,7 @@ import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
 import Programs from "./Pages/Programs/Programs";
 import ProgramDetails from "./Pages/ProgramDetails/ProgramDetails";
+import Academy from "./Pages/Academy/Academy";
 
 const App = () => {
     const user = JSON.parse(localStorage.getItem('user'))
@@ -35,6 +36,9 @@ const App = () => {
                     <Route path= '/programs' exact component={Programs} />
                     <Route path= '/programs/search' exact component={Programs} />
                     <Route path= '/program/:id' exact component={ProgramDetails} />
+                    // Academies
+                    <Route path= '/academies' exact component={Academy} />
+                    <Route path= '/academies/search' exact component={Academy} />
                     <Route component={NotFound}/>   //Not Found Page if wrong url
                 </Switch>
             </Container>

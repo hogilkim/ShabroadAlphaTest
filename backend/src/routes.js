@@ -20,4 +20,8 @@ routes.post('/createProgram', AcademyController.createProgram);
 routes.get('/searchPrograms', AcademyController.searchPrograms);
 routes.get('/getPrograms', AcademyController.getPrograms);
 routes.get('/program/:id', AcademyController.getProgram)
+
+//academies
+routes.get('/searchAcademies', AcademyController.searchAcademies);
+
 module.exports = routes;

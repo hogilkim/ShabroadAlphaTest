@@ -86,5 +86,14 @@ module.exports = {
         } catch (error) {
             res.status(404).json({message: error.message});
         }
+    }, async searchAcademies(req, res){
+        const {city} = req.query;
+        console.log(city);
+        try {
+            const academies = await Academy.find({city})
+            res.json({data: academies})
+        } catch (error) {
+            res.status(404).json({message: error.message});
+        }
     }
 }

@@ -29,10 +29,9 @@ const Programs = () => {
         const hashtags = query.get('hashtags');
         const city = query.get('city');
 
-        if (hashtags || city){
+        if ((hashtags || city) && !programs.length){
             searchOptions.hashtags = hashtags;
             searchOptions.city = city;
-            console.log(searchOptions)
             dispatch(getProgramsBySearch(searchOptions))
         }
     },[])

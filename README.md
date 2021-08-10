@@ -100,3 +100,6 @@ August 9:
     implementing searching academies by city in home. Now, frontend sends city info to backend, then backend sends response to frontend, and it stores to the redux.
 
     NEED TO WORK FOR TOMORROW: show results in "Academy" page.
+
+August 10:
+    Now users can get result of 'search academy by city' in "Academies" page

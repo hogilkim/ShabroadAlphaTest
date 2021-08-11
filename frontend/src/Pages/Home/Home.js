@@ -47,13 +47,16 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const cityOptions= {
-    US :['미국', '뉴욕', '보스톤', 'LA', '샌프란시스코', '시카고'],
+    US :['뉴욕', '보스톤', 'LA', '샌프란시스코', '시카고'],
     Canada : ['토론토', '몬트리올'],
     UK : ['런던', '맨체스터'],
     Austrailia : ['시드니', '멜버른'],
     Philippine : ['마닐라', '세부'],
     Vietnam : ['호찌민', '하노이', '다낭']
 }
+
+const usCities = ['New York', 'Boston', 'LA', 'Chicago']
+const canadaCities = ['토론토', '몬트리올']
 
 
 const Home = () => {
@@ -65,9 +68,7 @@ const Home = () => {
     const anchorRef = useRef(null);
     const [selectedIndex, setSelectedIndex] = useState(1);
 
-    const [city, setCity] = useState("어디에서 공부하고 싶으신가요?")
-
-    
+    const [city, setCity] = useState("")
 
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -86,11 +87,6 @@ const Home = () => {
         setOpen(false);
     };
 
-
-    const handleChange = (e) =>{
-        setCity(e.target.value);
-    }
-
     const searchAcademy = (e)=>{
         if(city){
             dispatch(getAcademiesBySearch(city));
@@ -107,18 +103,26 @@ const Home = () => {
             alt= "Shabroad Icon"/>
             
             <div className={classes.search_center}>
-                <Input onChange={handleChange} className={classes.search_input} type='text' placeholder="도시를 선택해주세요" />
+                <Typography className={classes.search_input} type='text' placeholder="도시를 선택해주세요" > {city} </Typography>
                 <SearchIcon/>
             </div>
             <div className={classes.search_right}>
                 <Button onClick={searchAcademy}>검색</Button>
-                <Button>나에게 맞는 프로그램 찾기</Button>
+                <Button onClick={()=>{history.push('/programs')}}>나에게 맞는 프로그램 찾기</Button>
             </div>
 
         </div>
             <Paper className={classes.select_city}>
-                <Typography>도시</Typography>
-                
+                <Grid>
+                    {usCities.map((city)=>
+                        <Button onClick={()=>{setCity(city)}}>{city}</Button>
+                    )}
+                </Grid>
+                <Grid>
+                    {canadaCities.map((city)=>
+                        <Button onClick={()=>{setCity(city)}}>{city}</Button>
+                    )}
+                </Grid>
             </Paper>
 
         </>
@@ -126,6 +130,7 @@ const Home = () => {
 }
 export default Home
 
+//onClick={cityClick(city)}
 {/* <div>
                 <Map/>
             </div> */}

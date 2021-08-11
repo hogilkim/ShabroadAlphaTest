@@ -40,8 +40,6 @@ const Academies = () => {
             history.push('/');
         }
     }
-
-    console.log("academies:", academies)
     return (
         <Grow in>
             <Container>

@@ -103,3 +103,6 @@ August 9:
 
 August 10:
     Now users can get result of 'search academy by city' in "Academies" page
+
+August 11:
+ Changed main page: users now have to select cities with buttons.

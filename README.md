@@ -105,4 +105,7 @@ August 10:
     Now users can get result of 'search academy by city' in "Academies" page
 
 August 11:
- Changed main page: users now have to select cities with buttons.
+    Changed main page: users now have to select cities with buttons.
+
+August 12:
+    Learned how to implement text editor using react-quill package

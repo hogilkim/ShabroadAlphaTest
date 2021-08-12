@@ -1,17 +1,21 @@
 import React, {useState, useRef} from 'react';
-import {Input, Menu, Grid, Button, ButtonGroup, ClickAwayListener, Grow, Paper, Popper, MenuItem, MenuList, Typography} from "@material-ui/core"
+import {Grid, Button,  Paper, Typography} from "@material-ui/core"
 import SearchIcon from '@material-ui/icons/Search';
 import Map from '../../components/Map/Map';
-import { makeStyles, useTheme, withTheme } from '@material-ui/core/styles';
+import { makeStyles,  } from '@material-ui/core/styles';
 
 import {useDispatch} from 'react-redux';
-import {useHistory, useLocation} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 
 import { getAcademiesBySearch } from '../../ReduxModules/searchAcademies';
 
 
-const useStyles = makeStyles((theme) => ({
+//test
+import QuillEditor from '../../components/QuillEditor/QuillEditor';
+
+
+const useStyles = makeStyles(() => ({
     search_container:{
         display: 'flex',
         justifyContent: 'space-between',
@@ -46,14 +50,14 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-const cityOptions= {
-    US :['뉴욕', '보스톤', 'LA', '샌프란시스코', '시카고'],
-    Canada : ['토론토', '몬트리올'],
-    UK : ['런던', '맨체스터'],
-    Austrailia : ['시드니', '멜버른'],
-    Philippine : ['마닐라', '세부'],
-    Vietnam : ['호찌민', '하노이', '다낭']
-}
+// const cityOptions= {
+//     US :['뉴욕', '보스톤', 'LA', '샌프란시스코', '시카고'],
+//     Canada : ['토론토', '몬트리올'],
+//     UK : ['런던', '맨체스터'],
+//     Austrailia : ['시드니', '멜버른'],
+//     Philippine : ['마닐라', '세부'],
+//     Vietnam : ['호찌민', '하노이', '다낭']
+// }
 
 const usCities = ['New York', 'Boston', 'LA', 'Chicago']
 const canadaCities = ['토론토', '몬트리올']
@@ -66,26 +70,24 @@ const Home = () => {
 
     const [open, setOpen] = useState(false);
     const anchorRef = useRef(null);
-    const [selectedIndex, setSelectedIndex] = useState(1);
 
-    const [city, setCity] = useState("")
+    const [city, setCity] = useState("도시를 선택해 주세요!")
 
-    const handleClose = (event) => {
-        if (anchorRef.current && anchorRef.current.contains(event.target)) {
-            return;
-        }
+    // const handleClose = (event) => {
+    //     if (anchorRef.current && anchorRef.current.contains(event.target)) {
+    //         return;
+    //     }
     
-        setOpen(false);
-        };
+    //     setOpen(false);
+    //     };
     
-    const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-    };
-    const handleMenuItemClick = (event, city) => {
-        // setSelectedIndex(index);
-        setCity(city);
-        setOpen(false);
-    };
+    // const handleToggle = () => {
+    // setOpen((prevOpen) => !prevOpen);
+    // };
+    // const handleMenuItemClick = (event, city) => {
+    //     setCity(city);
+    //     setOpen(false);
+    // };
 
     const searchAcademy = (e)=>{
         if(city){
@@ -125,6 +127,8 @@ const Home = () => {
                 </Grid>
             </Paper>
 
+
+            <QuillEditor/>
         </>
     );
 }

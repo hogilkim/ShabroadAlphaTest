@@ -17,6 +17,7 @@ import ResetPassword from "./Pages/ResetPassword/ResetPassword";
 import Programs from "./Pages/Programs/Programs";
 import ProgramDetails from "./Pages/ProgramDetails/ProgramDetails";
 import Academies from "./Pages/Academies/Academies";
+// import AcademyEditor from "./Pages/AcademyEditor/AcademyEditor"
 
 const App = () => {
     const user = JSON.parse(localStorage.getItem('user'))
@@ -39,6 +40,7 @@ const App = () => {
                     // Academies
                     {/* <Route path= '/academies' exact component={Academy} /> */}
                     <Route path= '/academies/search' exact component={Academies} />
+                    {/* <Route path= '/academyeditor' exact component={AcademyEditor} /> */}
                     <Route component={NotFound}/>   //Not Found Page if wrong url
                 </Switch>
             </Container>

@@ -14,6 +14,7 @@ const AcademySchema = new mongoose.Schema({
         longitude: Number
     },
     nearby_amenity: String,
+    description: String,
     rating: {type: Number, min: 0, max: 5},
     programs:[{
         type: mongoose.Schema.Types.ObjectId

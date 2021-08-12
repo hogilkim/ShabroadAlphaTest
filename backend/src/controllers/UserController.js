@@ -60,10 +60,6 @@ module.exports = {
                         <p>localhost:3000</p>
                     `
                 }
-                // <p> localhost:3000/users/activate/${token}</p>
-
-
-                console.log("63");
                 
                 sgMail.send(emailData)
                 .then(()=>{
@@ -168,8 +164,8 @@ module.exports = {
 
             const token = jwt.sign({
                 email: existingUser.email, 
-                id: existingUser._id
-
+                id: existingUser._id,
+                userType: existingUser.userType
             }, process.env.JWT_SECRET, {expiresIn: "1d"})
 
             res.status(200).json({user: {

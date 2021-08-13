@@ -23,5 +23,6 @@ routes.get('/program/:id', AcademyController.getProgram)
 
 //academies
 routes.get('/searchAcademies', AcademyController.searchAcademies);
+routes.get('/academy/:id', AcademyController.getAcademy);
 
 module.exports = routes;

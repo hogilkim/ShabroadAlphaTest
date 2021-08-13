@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {getProgram} from '../../ReduxModules/searchPrograms'
 
 import useStyles from './styles'
@@ -10,7 +10,6 @@ import useStyles from './styles'
 const ProgramDetails = () => {
     const {program, isLoading} = useSelector((state)=>state.searchPrograms);
     const dispatch = useDispatch();
-    const history = useHistory();
     const classes = useStyles();
     const {id} = useParams();
     var type = (program.program_type == "WEEKLY" ? "주":"텀");
@@ -20,7 +19,6 @@ const ProgramDetails = () => {
     },[id])
 
     
-    console.log("program detail page", program)
     if(Object.keys(program).length === 0) return null;
     
     if (isLoading){

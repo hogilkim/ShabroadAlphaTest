@@ -109,3 +109,6 @@ August 11:
 
 August 12:
     Learned how to implement text editor using react-quill package
+
+August 13:
+    Added AcademyDetails page 

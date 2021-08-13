@@ -11,7 +11,6 @@ import {useHistory} from 'react-router-dom';
 const Academy = ({academy}) => {
     const history = useHistory();
     const openAcademy = () => history.push(`/academy/${academy._id}`);
-    console.log({academy})
 
     const classes = useStyles();
     return (

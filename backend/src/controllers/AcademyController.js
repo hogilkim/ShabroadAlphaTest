@@ -95,5 +95,15 @@ module.exports = {
         } catch (error) {
             res.status(404).json({message: error.message});
         }
+    },
+    async getAcademy(req, res){
+        const {id} = req.params;
+
+        try {
+            const academy = await Academy.findById(id);
+            res.status(200).json(academy);
+        } catch (error) {
+            res.status(404).json({message: error.message})
+        }
     }
 }

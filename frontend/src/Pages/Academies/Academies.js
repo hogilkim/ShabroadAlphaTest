@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useHistory, useLocation } from 'react-router-dom';
-import {Container, Grid, CircularProgress, Paper, AppBar, TextField, Button, Grow} from '@material-ui/core';
+import {Container, Grid, CircularProgress, AppBar, TextField, Button, Grow} from '@material-ui/core';
 import {useSelector, useDispatch} from 'react-redux';
 import {getAcademiesBySearch} from '../../ReduxModules/searchAcademies'
 import Academy from '../../components/Academy/Academy'

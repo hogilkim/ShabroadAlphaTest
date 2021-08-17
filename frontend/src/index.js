@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux'; //track redux's "store"
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux'; //compose
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 

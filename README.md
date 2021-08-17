@@ -117,3 +117,5 @@ August 13:
 August 17:
     More detailed AcademyDetails page. 
         1. implement ControlledAccordian from Material-ui
+        2. pass program details to ControlledAccordian
+    Now, when user goes into the AcademyDetails page, they will be able to see program details.

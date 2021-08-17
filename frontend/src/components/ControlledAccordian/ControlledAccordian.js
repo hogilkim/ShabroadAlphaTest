@@ -7,45 +7,45 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+root: {
     width: '100%',
-  },
-  heading: {
+},
+heading: {
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
     flexShrink: 0,
-  },
-  secondaryHeading: {
+},
+secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
-  },
+},
 }));
 
 export default function ControlledAccordions({heading, secondaryHeading, content}) {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+const classes = useStyles();
+const [expanded, setExpanded] = React.useState(false);
 
-  const handleChange = (panel) => (event, isExpanded) => {
+const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
-  };
+};
 
-  return (
+return (
     <div className={classes.root}>
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+    <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1bh-content"
+        id="panel1bh-header"
         >
-          <Typography className={classes.heading}>{heading}</Typography>
-          <Typography className={classes.secondaryHeading}>{secondaryHeading}</Typography>
+        <Typography className={classes.heading}>{heading}</Typography>
+        <Typography className={classes.secondaryHeading}>{secondaryHeading}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+        <Typography>
             {content}
-          </Typography>
+        </Typography>
         </AccordionDetails>
-      </Accordion>
+    </Accordion>
     </div>
-  );
+);
 }

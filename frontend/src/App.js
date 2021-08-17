@@ -8,7 +8,7 @@ import NavBar from './components/Navbar/Navbar'
 import Home from "./Pages/Home/Home";
 import About from "./Pages/About";
 import NotFound from "./Pages/NotFound";
-import MyPage from "./Pages/MyPage/MyPage";
+// import MyPage from "./Pages/MyPage/MyPage";
 import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
 import Activate from "./Pages/Activate/Activate";
@@ -29,7 +29,7 @@ const App = () => {
                 <Switch>
                     <Route path= '/' exact component={Home} />
                     <Route path= '/about' exact component={About} />
-                    <Route path= '/mypage' exact component={MyPage} />
+                    {/* <Route path= '/mypage' exact component={MyPage} /> */}
                     <Route path= '/login' exact component={()=>(!user?<Login/> : <Redirect to="/" />)} />
                     <Route path= '/signup' exact component={SignUp} />
                     <Route path= '/user/activate/:token' exact component={Activate}/>

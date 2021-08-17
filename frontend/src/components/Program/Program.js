@@ -1,6 +1,6 @@
 import React from 'react'
 import useStyles from './styles';
-import { Card, CardActions, CardContent, CardMedia, Typography, ButtonBase } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Typography, ButtonBase } from '@material-ui/core';
 import {useHistory} from 'react-router-dom';
 
 

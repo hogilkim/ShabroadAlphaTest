@@ -16,9 +16,6 @@ const AcademyDetails = () => {
     const {programs} = useSelector((state)=>state.searchPrograms)
     const dispatch = useDispatch();
     const classes = useStyles();
-
-    console.log("programs:", programs)
-
     const {id} = useParams();
 
     useEffect(()=>{
@@ -59,7 +56,7 @@ const AcademyDetails = () => {
             <Divider style={{ margin: '20px 0' }} />
 
             {programs && programs.map((program)=>(
-                <ControlledAccordian heading={program.program_name} secondaryHeading={program.program_type} content={program.age_group}/>
+                <ControlledAccordian key={program.program_name} heading={program.program_name} secondaryHeading={program.program_type} content={program.age_group}/>
             ))}
             </div>
     

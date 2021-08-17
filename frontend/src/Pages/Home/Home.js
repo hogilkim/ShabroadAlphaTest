@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import {Grid, Button,  Paper, Typography} from "@material-ui/core"
 import SearchIcon from '@material-ui/icons/Search';
-import Map from '../../components/Map/Map';
+// import Map from '../../components/Map/Map';
 import { makeStyles,  } from '@material-ui/core/styles';
 
 import {useDispatch} from 'react-redux';
@@ -68,8 +68,8 @@ const Home = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [open, setOpen] = useState(false);
-    const anchorRef = useRef(null);
+    // const [open, setOpen] = useState(false);
+    // const anchorRef = useRef(null);
 
     const [city, setCity] = useState("도시를 선택해 주세요!")
 

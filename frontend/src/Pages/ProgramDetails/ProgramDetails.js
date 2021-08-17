@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment';
+// import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import {getProgram} from '../../ReduxModules/searchPrograms'
 
@@ -12,7 +12,7 @@ const ProgramDetails = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const {id} = useParams();
-    var type = (program.program_type == "WEEKLY" ? "주":"텀");
+    var type = (program.program_type === "WEEKLY" ? "주":"텀");
 
     useEffect(()=>{
         dispatch(getProgram(id));

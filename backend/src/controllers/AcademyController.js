@@ -43,7 +43,7 @@ module.exports = {
 
         return res.json(academy_program);
 
-
+        // Search Programs By city & hashtags
     }, async searchPrograms(req, res){
         const {city, hashtags} = req.query;
                 try {
@@ -60,7 +60,18 @@ module.exports = {
         } catch(error){
             res.status(404).json({message: error.message});
         }
-    }, async getPrograms(req, res){
+    }, 
+    async searchProgramsByAcademyId(req, res){
+        const {id} = req.params;
+        try {
+            const programs = await AcademyProgram.find({academy_id: id})
+            res.status(200).json({data: programs})
+        } catch (error) {
+            res.status(404).json({messgae: error.message});
+        }
+    },
+    
+    async getPrograms(req, res){
         const {page} = req.query
 
         try {

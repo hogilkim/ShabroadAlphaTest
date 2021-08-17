@@ -22,6 +22,10 @@ const AcademyDetails = () => {
         dispatch(getAcademy(id));
     }, [id])
 
+    useEffect(()=>{
+        console.log(academy);
+    }, [academy])
+
 
 
 

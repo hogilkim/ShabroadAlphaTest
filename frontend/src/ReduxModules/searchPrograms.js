@@ -7,6 +7,17 @@ const GET_PROGRAM = 'searchPrograms/GET_PROGRAM'
 const GET_PROGRAMS_BY_SEARCH = 'searchPrograms/GET_PROGRAMS_BY_SEARCH'
 const START_LOADING = 'searchPrograms/START_LOADING'
 const END_LOADING = 'searchPrograms/END_LOADING'
+const SEARCH_PROGRAMS_BY_ACADEMY_ID = 'searchPrograms/SEARCH_PROGRAMS_BY_ACADEMY_ID'
+
+export const searchProgramsByAcademyId = (page) => async (dispatch) => {
+    try {
+        dispatch({type: START_LOADING});
+        const {data} = await api.searchProgramsByAcademyId(page);
+        dispatch({type: END_LOADING});
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
 export const getAllPrograms = (page) => async (dispatch) => {
 
@@ -67,7 +78,12 @@ const programsReducer = handleActions(
         }),
         [GET_PROGRAM]: (state, action)=>({
             ...state, program: action.payload
+        }),
+        [SEARCH_PROGRAMS_BY_ACADEMY_ID]: (state, action) => ({
+            ...state,
+            programs: action.payload.data
         })
+        
     },
     initialState
 

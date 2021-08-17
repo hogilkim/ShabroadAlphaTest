@@ -116,4 +116,4 @@ August 13:
 
 August 17:
     More detailed AcademyDetails page. 
-        1. implement ControlledAccordian in Material-ui
+        1. implement ControlledAccordian from Material-ui

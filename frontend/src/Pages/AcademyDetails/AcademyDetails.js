@@ -3,8 +3,11 @@ import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAcademy } from '../../ReduxModules/searchAcademies';
 import { useParams } from 'react-router-dom';
+import ControlledAccordian from '../../components/ControlledAccordian/ControlledAccordian'
 
 import useStyles from './styles'
+
+
 
 
 const AcademyDetails = () => {
@@ -18,6 +21,10 @@ const AcademyDetails = () => {
     useEffect(()=>{
         dispatch(getAcademy(id));
     }, [id])
+
+
+
+
 
     if(Object.keys(academy).length === 0) return (
         <h1>해당 도시가 존재하지 않습니다</h1>
@@ -46,6 +53,8 @@ const AcademyDetails = () => {
               <Divider style={{ margin: '20px 0' }} />
               <Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
               <Divider style={{ margin: '20px 0' }} />
+              <ControlledAccordian heading="heading" secondaryHeading="secondaryHeading" content="content"/>
+              <ControlledAccordian heading="heading" secondaryHeading="secondaryHeading" content="content"/>
             </div>
     
           </div>

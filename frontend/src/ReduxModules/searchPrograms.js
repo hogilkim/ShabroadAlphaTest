@@ -13,6 +13,7 @@ export const searchProgramsByAcademyId = (page) => async (dispatch) => {
     try {
         dispatch({type: START_LOADING});
         const {data} = await api.searchProgramsByAcademyId(page);
+        dispatch({type: SEARCH_PROGRAMS_BY_ACADEMY_ID, payload:data})
         dispatch({type: END_LOADING});
     } catch (error) {
         console.log(error.message);

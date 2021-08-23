@@ -119,3 +119,6 @@ August 17:
         1. implement ControlledAccordian from Material-ui
         2. pass program details to ControlledAccordian
     Now, when user goes into the AcademyDetails page, they will be able to see program details.
+
+August 23:
+    academy schema has description in html format. in AcademyDetails page, it can now show description in html. 

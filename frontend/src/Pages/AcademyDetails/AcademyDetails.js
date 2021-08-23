@@ -49,6 +49,7 @@ const AcademyDetails = () => {
             <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{academy.programs.map((program) => `#${program} `)}</Typography>
             <Typography gutterBottom variant="body1" component="p">{academy.email}</Typography>
             <Typography variant="h6">City: {academy.city}</Typography>
+            <div dangerouslySetInnerHTML={{ __html: academy.description }} />
             <Divider style={{ margin: '20px 0' }} />
             <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
             <Divider style={{ margin: '20px 0' }} />

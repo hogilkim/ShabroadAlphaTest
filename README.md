@@ -122,3 +122,6 @@ August 17:
 
 August 23:
     academy schema has description in html format. in AcademyDetails page, it can now show description in html. 
+
+September 9:
+    Registration/forget password/Login functions checked.

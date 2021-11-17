@@ -13,6 +13,4 @@ filename: function (req, file, cb) {
 
 var upload = multer({storage : storage});
 
-
-
 module.exports = upload;

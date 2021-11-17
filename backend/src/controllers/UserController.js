@@ -144,7 +144,6 @@ module.exports = {
         }
     },
 
-
     async login(req, res) {
 
         const { email, password } = req.body;
@@ -199,7 +198,6 @@ module.exports = {
         }
         
         
-
         //if exists
         const token = jwt.sign({
             _id: user._id

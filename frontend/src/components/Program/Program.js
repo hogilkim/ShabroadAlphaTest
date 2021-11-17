@@ -4,10 +4,6 @@ import { Card, CardContent, CardMedia, Typography, ButtonBase } from '@material-
 import {useHistory} from 'react-router-dom';
 
 
-
-
-
-
 const Program = ({program}) => {
     const history = useHistory();
     const openProgram = () => history.push(`/program/${program._id}`);

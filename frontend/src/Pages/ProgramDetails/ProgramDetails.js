@@ -34,7 +34,7 @@ const ProgramDetails = () => {
     { !(Object.keys(program).length === 0) && (
         <div className={classes.card}>
         <div className={classes.section}>
-        <img className={classes.media} src={'https://polylanguages.edu/wp-content/uploads/2020/04/International-Flags.jpg'} />
+        <img className={classes.media} src={'https://polylanguages.edu/wp-content/uploads/2020/04/International-Flags.jpg'} alt="academy"/>
 
           <Typography variant="h3" component="h2">{program.program_name}</Typography>
           <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{program.hashtag.map((tag) => `#${tag} `)}</Typography>

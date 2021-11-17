@@ -7,13 +7,10 @@ import { makeStyles,  } from '@material-ui/core/styles';
 import {useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 
-
 import { getAcademiesBySearch } from '../../ReduxModules/searchAcademies';
-
 
 //test
 import QuillEditor from '../../components/QuillEditor/QuillEditor';
-
 
 const useStyles = makeStyles(() => ({
     search_container:{

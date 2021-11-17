@@ -6,6 +6,7 @@ module.exports = {
         const {name, company, telephone_number, address, email, city, location, nearby_amenity, rating} = req.body;
         // console.log(req.files)
 
+        
         //!
         //! for storing images. Commented Out for a moment. dont forget to uncomment
         // let array = [];
@@ -14,6 +15,7 @@ module.exports = {
         //     // console.log(json.filename);
         // })
         //!
+
         const academy = await Academy.create({
             name,
             company,

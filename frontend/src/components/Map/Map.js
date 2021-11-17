@@ -11,7 +11,6 @@ function MapSetting(){
         </GoogleMap>
     );
 }
-
 const WrappedMap = withScriptjs(withGoogleMap(MapSetting));
 
 export default function Map(){
